@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "551193300054",
+    "firebase_url": "https://quirquirutas-1f2ac.firebaseio.com",
+    "project_id": "quirquirutas-1f2ac",
+    "storage_bucket": "quirquirutas-1f2ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551193300054:android:09f1734f0272b73d397ff7",
+        "android_client_info": {
+          "package_name": "com.example.quirquirutas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "551193300054-f7ruhjt8u6apt17mu8f3oiajd3trlka1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7RL6cXX6BpOZ7aKM-WOGpD7NET9bpqdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "551193300054-f7ruhjt8u6apt17mu8f3oiajd3trlka1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
