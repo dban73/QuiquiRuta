@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "551193300054-duriupq3rtm178o8g60tlhr2b5c0nvfg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quirquirutas",
+            "certificate_hash": "04dc2333d3bbb3274091fc52f1d73046ca692354"
+          }
+        },
+        {
           "client_id": "551193300054-f7ruhjt8u6apt17mu8f3oiajd3trlka1.apps.googleusercontent.com",
           "client_type": 3
         }

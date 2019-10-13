@@ -2,8 +2,12 @@ package com.example.quirquirutas;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,12 +24,16 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps1);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+       int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+       if(status == ConnectionResult.SUCCESS) {
+           SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                   .findFragmentById(R.id.map);
+           mapFragment.getMapAsync(this);
+       }else{
+           Dialog d = GooglePlayServicesUtil.getErrorDialog(status,(Activity)getApplicationContext(),10);
+           d.show();
+       }
     }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -38,10 +46,10 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng oruro = new LatLng(-17.9642368,-67.1064064);
+        mMap.addMarker(new MarkerOptions().position(oruro).title("ORURO"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(oruro,16));
     }
 }
