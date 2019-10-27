@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (firebaseAuth.getCurrentUser() != null) {
 
-                    startActivity(new Intent(MainActivity.this, MapsActivity1.class));
+                    startActivity(new Intent(MainActivity.this, RutasActivity.class));
 
                 } else {
                      Toast.makeText(MainActivity.this, "Datos Incorrectos", Toast.LENGTH_SHORT).show();
