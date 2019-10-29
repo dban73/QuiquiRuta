@@ -1,54 +1,75 @@
 package com.example.quirquirutas;
 
-import android.app.Activity;
-import android.app.Dialog;
+
 import android.os.Bundle;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quirquirutas.Objetos.FirebaseReferences;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
 
 public class RutasActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private AppBarConfiguration mAppBarConfiguration;
     private GoogleMap mMap;
+
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutas);
-
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
-        if(status == ConnectionResult.SUCCESS) {
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        //mapas
+         /*   SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.maps);
-            mapFragment.getMapAsync(this);
-        }else{
-            Dialog d = GooglePlayServicesUtil.getErrorDialog(status,(Activity)getApplicationContext(),10);
-            d.show();
-        }
+            mapFragment.getMapAsync(this);*/
+            //database
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
+        //myRef.setValue(9);
+       //Log.i("KEY",myRef.getKey());
+       myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int valor = dataSnapshot.getValue(Integer.class);
+                Log.i("Datos",valor+"");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Log.e("ERROR",databaseError.getMessage());
+            }
+        });
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
